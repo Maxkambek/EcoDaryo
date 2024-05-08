@@ -40,7 +40,7 @@ const LastNews = () => {
                       <img src={clock} alt="" /> {item.created_at.slice(11, 16)}
                     </div>
                     <div
-                      onClick={() => nav("/yangiliklar/1/")}
+                      onClick={() => nav(`/yangiliklar/${item.id}/`)}
                       className="item_more"
                     >
                       Batafsil
