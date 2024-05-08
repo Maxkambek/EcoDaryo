@@ -5,9 +5,13 @@ import { Link } from "react-router-dom";
 import Accordion from "react-bootstrap/Accordion";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
+import { useContext } from "react";
+import { ThemeContext } from "../context/ThemeContext";
+
 const Karta = () => {
   const [activeTab, setActiveTab] = useState("1");
   const [color, setColor] = useState(false);
+  const { theme } = useContext(ThemeContext);
 
   const { t } = useTranslation();
 
@@ -22,7 +26,10 @@ const Karta = () => {
   };
 
   return (
-    <section className="Karta" data-aos="fade-right">
+    <section
+      className={`Karta ${theme === "light" ? "" : "active"}`}
+      data-aos="fade-right"
+    >
       <div className="container">
         <div className="home_news_header">
           <div className="last_h">{"Murojaat tahlili"}</div>
@@ -320,12 +327,14 @@ const Karta = () => {
             <TabPane tabId="1">
               <div className="karta-info__info">
                 <h2>
-                  Давлат экологик экспертизаси маркази Тошкент вилояти филиали
+                  EKOLOGIYA, ATROF-MUHITNI MUHOFAZA QILISH VA IQLIM O‘ZGARISHI
+                  VAZIRLIGI HUZURIDAGI “XAVFSIZ DARYO BOSHQARMASI” DAVLAT
+                  MUASSASASI
                 </h2>
                 <Accordion className="mb-4">
                   <Accordion.Item eventKey="0">
                     <Accordion.Header className="select-region-text">
-                      Выбрать область
+                      Manzil:
                     </Accordion.Header>
                     <Accordion.Body>
                       <Nav className="regions-form">
@@ -521,11 +530,14 @@ const Karta = () => {
                   </Accordion.Item>
                 </Accordion>
 
-                <h3>{t("address")}</h3>
-                <p>Тошкент шаҳар, Чилонзор тумани, Қатортол кўчаси, 60Б-уй</p>
+                <h3>{t("Manzil:")}</h3>
+                <p>
+                  Toshkent shahar Mirzo-Ulug‘bek tumani do‘rmon yo‘li koʻchasi
+                  2-A uy
+                </p>
 
-                <h3>{t("user_tell")}</h3>
-                <p>+998712070695</p>
+                <h3>{t("Telefon Raqam")}</h3>
+                <p>+998712627528</p>
 
                 <h3>{t("email")}</h3>
                 <p>toshkentviloyati@ekoekspertiza.uz</p>
@@ -3205,10 +3217,7 @@ const Karta = () => {
             </TabPane>
             <TabPane tabId="14">
               <div className="karta-info__info">
-                <h2>
-                  Давлат экологик экспертизаси маркази Қорақалпоғистон
-                  Республикаси филиали
-                </h2>
+                <h2>Qoraqalpog'iston Respublikasi</h2>
 
                 <Accordion className="mb-4">
                   <Accordion.Item eventKey="0">
@@ -3409,11 +3418,8 @@ const Karta = () => {
                   </Accordion.Item>
                 </Accordion>
 
-                <h3>{t("address")}</h3>
-                <p>
-                  Қорақалпоғистон Республикаси, Нукус шаҳри, Тан Нури кўчаси,
-                  181-уй
-                </p>
+                <h3>{t("Manzil:")}</h3>
+                <p>Qoraqalpog'iston Respublikasi</p>
 
                 <h3>{t("user_tell")}</h3>
                 <p>+998612240669</p>

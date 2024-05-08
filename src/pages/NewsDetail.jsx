@@ -1,9 +1,12 @@
 import Links from "../components/Links";
+import { useContext } from "react";
+import { ThemeContext } from "../context/ThemeContext";
 
 const NewsDetail = () => {
+  const { theme } = useContext(ThemeContext);
   return (
     <>
-      <div className="NewDetail">
+      <div className={`NewDetail ${theme === "light" ? "" : "active"}`}>
         <div className="container">
           <div className="detail_news_header">
             <div className="news_link">

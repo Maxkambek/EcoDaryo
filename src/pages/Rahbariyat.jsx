@@ -8,11 +8,24 @@ import tel from "../assets/PhoneCall.png";
 import sms from "../assets/mail.png";
 import clock from "../assets/clock1.png";
 import Links from "../components/Links";
+import { useContext, useEffect, useState } from "react";
+import { ThemeContext } from "../context/ThemeContext";
+import axios from "axios";
+import { API_PATH } from "../constants/constants";
 
 const Rahbariyat = () => {
+  const { theme } = useContext(ThemeContext);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    axios.get(API_PATH + "/main/leaders/").then((res) => {
+      setData(res.data);
+    });
+  }, []);
+
   return (
     <>
-      <div className="Rahbariyat">
+      <div className={`Rahbariyat ${theme === "light" ? "" : "active"}`}>
         <div className="container">
           <div className="rah_head_box">
             <div className="rah_left">
@@ -33,151 +46,33 @@ const Rahbariyat = () => {
           </div>
           <div className="rah_main">
             <div className="row">
-              <div className="col-4 mb-4">
-                <div className="rah_item">
-                  <div className="rah_image">
-                    <img src={rah} alt="" />
-                  </div>
-                  <div className="rah_content_box">
-                    <div className="lavozim">
-                      O‘zbekiston Respublikasi Ekologiya, atrof-muhitni muhofaza
-                      qilish va iqlim o‘zgarishi vazirligi huzuridagi “Xavfsiz
-                      daryo boshqarmasi” davlat muassasasi boshlig‘i v.v.b.
+              {data?.map((item, index) => (
+                <div key={index} className="col-4 mb-4">
+                  <div className="rah_item">
+                    <div className="rah_image">
+                      <img src={item.image} alt="" />
                     </div>
-                    <div className="name">Turaxanov Ahrorxon Asrorxanovich</div>
-                    <div className="info_box">
-                      <div className="phone">
-                        <img src={tel} alt="" />
-                        <div>+998712627528</div>
-                      </div>
-                      <div className="sms">
-                        <img src={sms} alt="" />
-                        <div>ecodaryo@uemail.com</div>
-                      </div>
-                      <div className="vaqt">
-                        <img src={clock} alt="" />
-                        <div>9:00 dan 11:00 gacha</div>
+                    <div className="rah_content_box">
+                      <div className="lavozim">{item.position}</div>
+                      <div className="name">{item.name}</div>
+                      <div className="info_box">
+                        <div className="phone">
+                          <img src={tel} alt="" />
+                          <div>{item.phone}</div>
+                        </div>
+                        <div className="sms">
+                          <img src={sms} alt="" />
+                          <div>{item.email}</div>
+                        </div>
+                        <div className="vaqt">
+                          <img src={clock} alt="" />
+                          <div>{item.work_time}</div>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>{" "}
-              <div className="col-4 mb-4">
-                <div className="rah_item">
-                  <div className="rah_image">
-                    <img src={rah} alt="" />
-                  </div>
-                  <div className="rah_content_box">
-                    <div className="lavozim">
-                      O‘zbekiston Respublikasi Ekologiya, atrof-muhitni muhofaza
-                      qilish va iqlim o‘zgarishi vazirligi huzuridagi “Xavfsiz
-                      daryo boshqarmasi” davlat muassasasi boshlig‘i v.v.b.
-                    </div>
-                    <div className="name">Turaxanov Ahrorxon Asrorxanovich</div>
-                    <div className="info_box">
-                      <div className="phone">
-                        <img src={tel} alt="" />
-                        <div>+998712627528</div>
-                      </div>
-                      <div className="sms">
-                        <img src={sms} alt="" />
-                        <div>ecodaryo@uemail.com</div>
-                      </div>
-                      <div className="vaqt">
-                        <img src={clock} alt="" />
-                        <div>9:00 dan 11:00 gacha</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>{" "}
-              <div className="col-4 mb-4">
-                <div className="rah_item">
-                  <div className="rah_image">
-                    <img src={rah} alt="" />
-                  </div>
-                  <div className="rah_content_box">
-                    <div className="lavozim">
-                      O‘zbekiston Respublikasi Ekologiya, atrof-muhitni muhofaza
-                      qilish va iqlim o‘zgarishi vazirligi huzuridagi “Xavfsiz
-                      daryo boshqarmasi” davlat muassasasi boshlig‘i v.v.b.
-                    </div>
-                    <div className="name">Turaxanov Ahrorxon Asrorxanovich</div>
-                    <div className="info_box">
-                      <div className="phone">
-                        <img src={tel} alt="" />
-                        <div>+998712627528</div>
-                      </div>
-                      <div className="sms">
-                        <img src={sms} alt="" />
-                        <div>ecodaryo@uemail.com</div>
-                      </div>
-                      <div className="vaqt">
-                        <img src={clock} alt="" />
-                        <div>9:00 dan 11:00 gacha</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>{" "}
-              <div className="col-4 mb-4">
-                <div className="rah_item">
-                  <div className="rah_image">
-                    <img src={rah} alt="" />
-                  </div>
-                  <div className="rah_content_box">
-                    <div className="lavozim">
-                      O‘zbekiston Respublikasi Ekologiya, atrof-muhitni muhofaza
-                      qilish va iqlim o‘zgarishi vazirligi huzuridagi “Xavfsiz
-                      daryo boshqarmasi” davlat muassasasi boshlig‘i v.v.b.
-                    </div>
-                    <div className="name">Turaxanov Ahrorxon Asrorxanovich</div>
-                    <div className="info_box">
-                      <div className="phone">
-                        <img src={tel} alt="" />
-                        <div>+998712627528</div>
-                      </div>
-                      <div className="sms">
-                        <img src={sms} alt="" />
-                        <div>ecodaryo@uemail.com</div>
-                      </div>
-                      <div className="vaqt">
-                        <img src={clock} alt="" />
-                        <div>9:00 dan 11:00 gacha</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>{" "}
-              <div className="col-4 mb-4">
-                <div className="rah_item">
-                  <div className="rah_image">
-                    <img src={rah} alt="" />
-                  </div>
-                  <div className="rah_content_box">
-                    <div className="lavozim">
-                      O‘zbekiston Respublikasi Ekologiya, atrof-muhitni muhofaza
-                      qilish va iqlim o‘zgarishi vazirligi huzuridagi “Xavfsiz
-                      daryo boshqarmasi” davlat muassasasi boshlig‘i v.v.b.
-                    </div>
-                    <div className="name">Turaxanov Ahrorxon Asrorxanovich</div>
-                    <div className="info_box">
-                      <div className="phone">
-                        <img src={tel} alt="" />
-                        <div>+998712627528</div>
-                      </div>
-                      <div className="sms">
-                        <img src={sms} alt="" />
-                        <div>ecodaryo@uemail.com</div>
-                      </div>
-                      <div className="vaqt">
-                        <img src={clock} alt="" />
-                        <div>9:00 dan 11:00 gacha</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>

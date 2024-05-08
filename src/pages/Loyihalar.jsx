@@ -1,9 +1,12 @@
 import Links from "../components/Links";
+import { useContext } from "react";
+import { ThemeContext } from "../context/ThemeContext";
 
 const Loyihalar = () => {
+  const { theme } = useContext(ThemeContext);
   return (
     <>
-      <div className="Loyihalar">
+      <div className={`Loyihalar ${theme === "light" ? "" : "active"}`}>
         <div className="container">
           <div className="loyiha_header">
             <div className="news_link">

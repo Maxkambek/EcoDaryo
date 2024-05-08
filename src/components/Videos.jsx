@@ -1,11 +1,21 @@
 import { useNavigate } from "react-router-dom";
 import clock from "../assets/clock1.png";
-import video from "../assets/video.mp4";
+import { useContext, useEffect, useState } from "react";
+import { ThemeContext } from "../context/ThemeContext";
+import axios from "axios";
+import { API_PATH } from "../constants/constants";
 
 const Videos = () => {
+  const { theme } = useContext(ThemeContext);
   const nav = useNavigate();
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    axios.get(API_PATH + "/main/video/").then((res) => {
+      setData(res.data);
+    });
+  }, []);
   return (
-    <div className="Videos">
+    <div className={`Videos ${theme === "light" ? "" : "active"}`}>
       <div className="container">
         <div className="home_news_header">
           <div className="last_h">{"Videolar"}</div>
@@ -17,96 +27,23 @@ const Videos = () => {
 
         <div className="videos_main">
           <div className="row">
-            <div className="col-4 mb-4">
-              <div className="videos_item">
-                <div className="video_container">
-                  <video autoPlay controls>
-                    <source src={video} type="video/mp4" />
-                  </video>
-                </div>
-                <div className="video_content_box">
-                  <div className="video_name">
-                    Avval xabar berganimizdek, 2024-yilning 20-fevral kunidan
-                    29-fevral kuniga qadar...
+            {data?.map((item, index) => (
+              <div key={index} className="col-4 mb-4">
+                <div className="videos_item">
+                  <div className="video_container">
+                    <video autoPlay controls>
+                      <source src={item.video_file} type="video/mp4" />
+                    </video>
                   </div>
-                  <div className="item_clock">
-                    <img src={clock} alt="" /> 09:50
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-4 mb-4">
-              <div className="videos_item">
-                <div className="video_container">
-                  <video autoPlay controls>
-                    <source src={video} type="video/mp4" />
-                  </video>
-                </div>
-                <div className="video_content_box">
-                  <div className="video_name">
-                    Avval xabar berganimizdek, 2024-yilning 20-fevral kunidan
-                    29-fevral kuniga qadar...
-                  </div>
-                  <div className="item_clock">
-                    <img src={clock} alt="" /> 09:50
+                  <div className="video_content_box">
+                    <div className="video_name">{item.title.slice(0, 200)}</div>
+                    <div className="item_clock">
+                      <img src={clock} alt="" /> {item.created_at.slice(11, 16)}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="col-4 mb-4">
-              <div className="videos_item">
-                <div className="video_container">
-                  <video autoPlay controls>
-                    <source src={video} type="video/mp4" />
-                  </video>
-                </div>
-                <div className="video_content_box">
-                  <div className="video_name">
-                    Avval xabar berganimizdek, 2024-yilning 20-fevral kunidan
-                    29-fevral kuniga qadar...
-                  </div>
-                  <div className="item_clock">
-                    <img src={clock} alt="" /> 09:50
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-4 mb-4">
-              <div className="videos_item">
-                <div className="video_container">
-                  <video autoPlay controls>
-                    <source src={video} type="video/mp4" />
-                  </video>
-                </div>
-                <div className="video_content_box">
-                  <div className="video_name">
-                    Avval xabar berganimizdek, 2024-yilning 20-fevral kunidan
-                    29-fevral kuniga qadar...
-                  </div>
-                  <div className="item_clock">
-                    <img src={clock} alt="" /> 09:50
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-4 mb-4">
-              <div className="videos_item">
-                <div className="video_container">
-                  <video autoPlay controls>
-                    <source src={video} type="video/mp4" />
-                  </video>
-                </div>
-                <div className="video_content_box">
-                  <div className="video_name">
-                    Avval xabar berganimizdek, 2024-yilning 20-fevral kunidan
-                    29-fevral kuniga qadar...
-                  </div>
-                  <div className="item_clock">
-                    <img src={clock} alt="" /> 09:50
-                  </div>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>

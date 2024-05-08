@@ -1,11 +1,14 @@
 import Links from "../components/Links";
 import news from "../assets/card-image.png";
 import clock from "../assets/clock1.png";
+import { useContext } from "react";
+import { ThemeContext } from "../context/ThemeContext";
 
 const News = () => {
+  const { theme } = useContext(ThemeContext);
   return (
     <>
-      <div className="News">
+      <div className={`News ${theme === "light" ? "" : "active"}`}>
         <div className="container">
           <div className="news_header">
             <div className="news_link">

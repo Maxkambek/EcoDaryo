@@ -4,10 +4,23 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Pagination, Navigation, Autoplay } from "swiper/modules";
 import back from "../assets/back.png";
+import { useContext, useEffect, useState } from "react";
+import { ThemeContext } from "../context/ThemeContext";
+import axios from "axios";
+import { API_PATH } from "../constants/constants";
 
 const Header = () => {
+  const { theme } = useContext(ThemeContext);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    axios.get(API_PATH + "/main/slider/").then((res) => {
+      setData(res.data);
+    });
+  }, []);
+
   return (
-    <div className="Header">
+    <div className={`Header ${theme === "light" ? "" : "active"}`}>
       <div
         style={{
           backgroundImage: `url(${back})`,
@@ -36,62 +49,15 @@ const Header = () => {
          
           `}
         >
-          <SwiperSlide>
-            <div className="container slider_box">
-              <div className="slider_name">
-                {`   O'zbekiston Respublikasi Ekologiya, atrof-muhitni muhofaza qilish
-              va iqlim o‘zgarishi vazirligi huzuridagi "Xavfsiz daryo
-              boshqarmasi" davlat muassasasi`}
+          {data?.map((item, index) => (
+            <SwiperSlide key={index}>
+              <div className="container slider_box">
+                <div className="slider_name">{item.title}</div>
+                <div className="slider_p">{item.content}</div>
+                <div className="slider_btn">Batafsil</div>
               </div>
-              <div className="slider_p">
-                Oʼzbekiston Respublikasi Prezidentining 2018-yil 9-iyuldagi
-                PQ-3841-son qaroriga muvofiq tashkil etilgan.
-              </div>
-              <div className="slider_btn">Batafsil</div>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            <div className="container slider_box">
-              <div className="slider_name">
-                {`   O'zbekiston Respublikasi Ekologiya, atrof-muhitni muhofaza qilish
-              va iqlim o‘zgarishi vazirligi huzuridagi "Xavfsiz daryo
-              boshqarmasi" davlat muassasasi`}
-              </div>
-              <div className="slider_p">
-                Oʼzbekiston Respublikasi Prezidentining 2018-yil 9-iyuldagi
-                PQ-3841-son qaroriga muvofiq tashkil etilgan.
-              </div>
-              <div className="slider_btn">Batafsil</div>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            <div className="container slider_box">
-              <div className="slider_name">
-                {`   O'zbekiston Respublikasi Ekologiya, atrof-muhitni muhofaza qilish
-              va iqlim o‘zgarishi vazirligi huzuridagi "Xavfsiz daryo
-              boshqarmasi" davlat muassasasi`}
-              </div>
-              <div className="slider_p">
-                Oʼzbekiston Respublikasi Prezidentining 2018-yil 9-iyuldagi
-                PQ-3841-son qaroriga muvofiq tashkil etilgan.
-              </div>
-              <div className="slider_btn">Batafsil</div>
-            </div>
-          </SwiperSlide>
-          <SwiperSlide>
-            <div className="container slider_box">
-              <div className="slider_name">
-                {`   O'zbekiston Respublikasi Ekologiya, atrof-muhitni muhofaza qilish
-              va iqlim o‘zgarishi vazirligi huzuridagi "Xavfsiz daryo
-              boshqarmasi" davlat muassasasi`}
-              </div>
-              <div className="slider_p">
-                Oʼzbekiston Respublikasi Prezidentining 2018-yil 9-iyuldagi
-                PQ-3841-son qaroriga muvofiq tashkil etilgan.
-              </div>
-              <div className="slider_btn">Batafsil</div>
-            </div>
-          </SwiperSlide>
+            </SwiperSlide>
+          ))}
         </Swiper>
       </div>
     </div>

@@ -1,10 +1,13 @@
 import Links from "../components/Links";
 import person from "../assets/person.png";
+import { useContext } from "react";
+import { ThemeContext } from "../context/ThemeContext";
 
 const HududiyDetail = () => {
+  const { theme } = useContext(ThemeContext);
   return (
     <>
-      <div className="HududiyDetail">
+      <div className={`HududiyDetail ${theme === "light" ? "" : "active"}`}>
         <div className="container">
           <div className="hududiy_detail_header">
             <div className="news_link">
@@ -72,7 +75,8 @@ const HududiyDetail = () => {
               </div>
               <div className="tarjima_item">
                 <div className="item_h">
-                  Халқ депутатлари, республика, вилоят, шаҳар ва туман Кенгаши <br />
+                  Халқ депутатлари, республика, вилоят, шаҳар ва туман Кенгаши{" "}
+                  <br />
                   депутати ёки бошқа сайланадиган органларнинг аъзосими (тўлиқ
                   кўрсатилиши лозим):
                 </div>
